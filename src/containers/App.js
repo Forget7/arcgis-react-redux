@@ -2,7 +2,7 @@ import {Layout, Menu} from "antd";
 
 const {Header, Content, Sider} = Layout;
 import React from "react";
-import {WebMapView} from "./WebMapView";
+import WebMapView from "./WebMapView";
 
 import MapImageLayer from "esri/layers/MapImageLayer";
 import WebMap from "esri/WebMap";
@@ -17,6 +17,7 @@ const webmap = new WebMap({
     basemap: "satellite",
     layers: [mapImageLayer]
 });
+
 
 const App = () => (
     <Layout className="layout">

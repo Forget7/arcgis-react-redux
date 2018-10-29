@@ -25,3 +25,5 @@ export class WebMapView extends React.Component {
         );
     }
 }
+
+export default WebMapView

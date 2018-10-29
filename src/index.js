@@ -4,7 +4,7 @@ import "./config";
 import React from "react";
 import ReactDOM from "react-dom";
 import {Provider} from 'react-redux'
-import tocReducer from './reducers/tocReducer'
+import rootReducers from "./reducers/index"
 import {applyMiddleware,createStore} from 'redux'
 import ReduxThunk from 'redux-thunk'
 
@@ -17,7 +17,7 @@ const addDOMNode = () => {
     document.body.appendChild(appNode);
     return appNode;
 };
-const store = createStore(tocReducer,applyMiddleware(ReduxThunk))
+const store = createStore(rootReducers,applyMiddleware(ReduxThunk));
 const render = (
     <Provider store={store}>
         <App/>

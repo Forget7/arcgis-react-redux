@@ -1,10 +1,17 @@
-const tocReducer = (state = 0, action) => {
+const tocReducer = (state = [], action) => {
     switch (action.type) {
-        case 'ADD':
-            return state + 1;
+        case 'InitTocList':
+            return [
+            ...state,
+            {
+                id: action.id,
+                title: action.title,
+                visible: action.visible
+            }
+        ];
         default:
             return state
     }
-}
+};
 
 export default tocReducer
