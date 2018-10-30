@@ -5,8 +5,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {Provider} from 'react-redux'
 import rootReducers from "./reducers/index"
-import {applyMiddleware,createStore} from 'redux'
-import ReduxThunk from 'redux-thunk'
+import finalCreateStore from './store/finalCreateStore.js'
 
 import "./css/main.scss";
 import App from "./containers/App";
@@ -17,7 +16,7 @@ const addDOMNode = () => {
     document.body.appendChild(appNode);
     return appNode;
 };
-const store = createStore(rootReducers,applyMiddleware(ReduxThunk));
+const store = finalCreateStore(rootReducers);
 const render = (
     <Provider store={store}>
         <App/>
