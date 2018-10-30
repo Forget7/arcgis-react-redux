@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-// "tocList"作为本component的“状态”，以props的形式传入。
+// "layerList"作为本component的“状态”，以props的形式传入。
 // 状态的出口。状态一但改变，就在组件中表现出来。
 const mapStateToProps = (state) => {
     return {
@@ -35,11 +35,22 @@ export class TocControl extends React.Component {
 
     componentDidMount() {
         this.props.mapImageLayer.when(() => {
-                const {cleanList,initTocList} = this.props;
+                const {cleanList, initTocList} = this.props;
                 cleanList();
                 let lyrCollections = this.props.mapImageLayer.allSublayers;
                 lyrCollections.map((sublayer => {
-                    initTocList(sublayer);
+                    let featureLayer = sublayer.createFeatureLayer();
+                    let fields=[];
+                    featureLayer.load().then(layer => {
+                        layer.fields.forEach(field => {
+                            fields.push(field.name)
+                        });
+                        const option={
+                            sublayer: sublayer,
+                            fields :fields
+                        };
+                        initTocList(option);
+                    });
                 }));
             }
         )
@@ -48,8 +59,7 @@ export class TocControl extends React.Component {
     render() {
         const {tocList, tocListOnChange} = this.props;
         return (
-            <TocList tocOptions={tocList} onChange={e => tocListOnChange(e.target.id)}>
-            </TocList>
+            <TocList tocOptions={tocList} onChange={e => tocListOnChange(e.target.id)}/>
         )
     }
 }
