@@ -1,3 +1,8 @@
+export const CleanList = () => ({
+        type:'CleanList'
+    }
+);
+
 export const initTocList = (option) => ({
     type: 'InitTocList',
     sublayer: option,
@@ -6,7 +11,7 @@ export const initTocList = (option) => ({
     visible: option.visible
 });
 
-export const setLayerVisible = (key) =>({
+export const setLayerVisible = (key) => ({
     type: 'SetLayerVisible',
-    key : key
+    key: key
 });

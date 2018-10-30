@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import tocReducer from './tocReducer.js'
+import layerReducer from './LayerReducer.js'
 
 
 export default combineReducers({
-    tocReducer,
+    layerReducer: layerReducer,
 })

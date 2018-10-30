@@ -8,6 +8,8 @@ import MapImageLayer from "esri/layers/MapImageLayer";
 import WebMap from "esri/WebMap";
 import {mapUrl}from "../contants/mapConfig"
 import TocControl from "./TocControl";
+import SearchInput from "../components/SearchInput";
+import SearchSelect from "../components/SearchSelect";
 
 const mapImageLayer = new MapImageLayer({
     url: mapUrl
@@ -18,6 +20,7 @@ const webmap = new WebMap({
     layers: [mapImageLayer]
 });
 
+const options=[];
 
 const App = () => (
     <Layout className="layout">
@@ -42,6 +45,10 @@ const App = () => (
                 <div className="main">
                     <WebMapView webmap={webmap}
                                 mapImageLayer={mapImageLayer}/>
+                    <div className="search_controls">
+                        <SearchSelect/>
+                        <SearchInput/>
+                    </div>
                 </div>
             </Content>
         </Layout>

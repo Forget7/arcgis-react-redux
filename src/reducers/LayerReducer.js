@@ -1,5 +1,7 @@
-const tocReducer = (state = [], action) => {
+const layerReducer = (state = [], action) => {
     switch (action.type) {
+        case 'CleanList':
+            return [];
         case 'InitTocList':
             return [
                 ...state,
@@ -23,4 +25,4 @@ const tocReducer = (state = [], action) => {
     }
 };
 
-export default tocReducer
+export default layerReducer

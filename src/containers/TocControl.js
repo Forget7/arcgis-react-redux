@@ -1,16 +1,19 @@
 import React from 'react'
 import TocList from "../components/TocList";
-import {initTocList, setLayerVisible} from "../actions/index.js"
+import {initTocList, setLayerVisible, CleanList} from "../actions/index.js"
 import {connect} from 'react-redux'
 
 // "initTocList" 作为本component的“方法”，以props的形式传入。
 // 方法的实现依赖于该函数和reducer函数（只能是纯函数）的处置。
 const mapDispatchToProps = (dispatch) => {
     return {
+        cleanList: () => {
+            dispatch(CleanList)
+        },
         initTocList: (sublayer) => {
             dispatch(initTocList(sublayer))
         },
-        TocListOnChange: (key) => {
+        tocListOnChange: (key) => {
             dispatch(setLayerVisible(key))
         }
     }
@@ -20,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 // 状态的出口。状态一但改变，就在组件中表现出来。
 const mapStateToProps = (state) => {
     return {
-        tocList: state.tocReducer
+        tocList: state.layerReducer
     }
 };
 
@@ -32,7 +35,8 @@ export class TocControl extends React.Component {
 
     componentDidMount() {
         this.props.mapImageLayer.when(() => {
-                const {initTocList} = this.props;
+                const {cleanList,initTocList} = this.props;
+                cleanList();
                 let lyrCollections = this.props.mapImageLayer.allSublayers;
                 lyrCollections.map((sublayer => {
                     initTocList(sublayer);
@@ -42,9 +46,9 @@ export class TocControl extends React.Component {
     }
 
     render() {
-        const {tocList, TocListOnChange} = this.props;
+        const {tocList, tocListOnChange} = this.props;
         return (
-            <TocList tocOptions={tocList} onChange={e => TocListOnChange(e.target.id)}>
+            <TocList tocOptions={tocList} onChange={e => tocListOnChange(e.target.id)}>
             </TocList>
         )
     }
