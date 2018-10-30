@@ -1,7 +1,29 @@
 import React from 'react'
 import TocList from "../components/TocList";
-import {initTocList} from "../actions/index.js"
+import {initTocList, setLayerVisible} from "../actions/index.js"
 import {connect} from 'react-redux'
+
+// "initTocList" 作为本component的“方法”，以props的形式传入。
+// 方法的实现依赖于该函数和reducer函数（只能是纯函数）的处置。
+const mapDispatchToProps = (dispatch) => {
+    return {
+        initTocList: (sublayer) => {
+            dispatch(initTocList(sublayer))
+        },
+        TocListOnChange: (key) => {
+            dispatch(setLayerVisible(key))
+        }
+    }
+};
+
+// "tocList"作为本component的“状态”，以props的形式传入。
+// 状态的出口。状态一但改变，就在组件中表现出来。
+const mapStateToProps = (state) => {
+    return {
+        tocList: state.tocReducer
+    }
+};
+
 
 export class TocControl extends React.Component {
     constructor(props) {
@@ -20,26 +42,14 @@ export class TocControl extends React.Component {
     }
 
     render() {
-        const {tocList} = this.props;
+        const {tocList, TocListOnChange} = this.props;
         return (
-            <TocList tocOptions={tocList} onChange={e => console.log(e)}/>
+            <TocList tocOptions={tocList} onChange={e => TocListOnChange(e.target.id)}>
+            </TocList>
         )
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        initTocList: (sublayer) => {
-            dispatch(initTocList(sublayer))
-        }
-    }
-};
-
-const mapStateToProps = (state) => {
-    return {
-        tocList: state.tocReducer
-    }
-};
 
 export default connect(
     mapStateToProps,

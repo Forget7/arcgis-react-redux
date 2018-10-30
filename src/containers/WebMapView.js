@@ -15,7 +15,7 @@ export class WebMapView extends React.Component {
 
     onComponentLoad = (view) => {
         this.props.mapImageLayer.when(() => {
-            view.goTo({target: this.props.mapImageLayer.fullExtent});//组件加载好之后有一个镜头移动的效果
+            view.goTo({target: this.props.mapImageLayer.fullExtent});//地图异步通讯成功，地图镜头移动到数据范围（full extent）
         });
     };
 
