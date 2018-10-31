@@ -11,6 +11,9 @@ export class WebMapView extends React.Component {
         view.container = document.getElementById('MapDiv');
         view.ui.move("zoom", "bottom-right");
         this.onComponentLoad(view);
+        view.on("click", function () {
+            document.getElementById("searchReItem").style.visibility = "hidden";
+        });
     }
 
     onComponentLoad = (view) => {

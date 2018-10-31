@@ -7,9 +7,11 @@ export class SearchSelect extends React.Component {
     }
 
     render() {
+        const {options,onChange}=this.props;
         return (
             <Cascader style={{width: 200}}
-                      options={this.props.options}
+                      onChange={onChange}
+                      options={options}
                       placeholder="请选择图层和字段" allowClear={false}/>
         )
     }

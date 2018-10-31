@@ -8,6 +8,7 @@ export class SearchInput extends React.Component {
         return (
             <Search placeholder="请输入需要查询的内容"
                     style={{width: 200}}
+                    onSearch={this.props.onSearch}
             />)
     }
 }

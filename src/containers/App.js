@@ -3,12 +3,12 @@ import {Layout, Menu} from "antd";
 const {Header, Content, Sider} = Layout;
 import React from "react";
 import WebMapView from "./WebMapView";
-
 import MapImageLayer from "esri/layers/MapImageLayer";
 import WebMap from "esri/WebMap";
-import {mapUrl}from "../contants/mapConfig"
+import {mapUrl} from "../contants/mapConfig"
 import TocControl from "./TocControl";
 import SearchControl from "./SearchControl";
+import {EventEmitter} from "fbemitter";
 
 const mapImageLayer = new MapImageLayer({
     url: mapUrl
@@ -18,6 +18,7 @@ const webmap = new WebMap({
     basemap: "satellite",
     layers: [mapImageLayer]
 });
+const emitter = new EventEmitter();
 
 const App = () => (
     <Layout className="layout">
@@ -42,9 +43,7 @@ const App = () => (
                 <div className="main">
                     <WebMapView webmap={webmap}
                                 mapImageLayer={mapImageLayer}/>
-                    <div className="search_controls">
-                        <SearchControl/>
-                    </div>
+                    <SearchControl emitter={emitter}/>
                 </div>
             </Content>
         </Layout>
