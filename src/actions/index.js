@@ -16,7 +16,3 @@ export const setLayerVisible = (key) => ({
     type: 'SetLayerVisible',
     key: key
 });
-
-export const getState = () => ({
-    type: "GetState"
-});

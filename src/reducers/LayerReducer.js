@@ -20,9 +20,7 @@ const layerReducer = (state = [], action) => {
                     item.sublayer.visible = item.sublayer.visible !== true;
                 }
             });
-            return state;
-        case'GetState':
-            return state;
+            return [...state];
         default:
             return state
     }

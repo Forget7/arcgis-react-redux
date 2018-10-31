@@ -6,21 +6,23 @@ import connect from "react-redux/es/connect/connect";
 const mapStateToProps = (state) => {
     let options = [];
     state.layerReducer.forEach(layer => {
-        let option = {
-            value: layer.title,
-            label: layer.title,
-            children: []
-        };
-        let childrenList = [];
-        layer.fields.forEach(field => {
-            let childrenOption = {
-                value: field,
-                label: field,
+        if (layer.visible===true) {
+            let option = {
+                value: layer.title,
+                label: layer.title,
+                children: []
             };
-            childrenList.push(childrenOption);
-        });
-        option.children = childrenList;
-        options.push(option);
+            let childrenList = [];
+            layer.fields.forEach(field => {
+                let childrenOption = {
+                    value: field,
+                    label: field,
+                };
+                childrenList.push(childrenOption);
+            });
+            option.children = childrenList;
+            options.push(option);
+        }
     });
     return {
         options: options
