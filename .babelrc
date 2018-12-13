@@ -3,6 +3,6 @@
   "plugins": [
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }],
     ["@babel/plugin-proposal-class-properties"],
-    ["transform-es2015-modules-amd"],
+    ["transform-es2015-modules-amd"]
   ]
 }
